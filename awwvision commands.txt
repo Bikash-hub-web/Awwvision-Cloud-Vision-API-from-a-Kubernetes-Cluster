@@ -1,0 +1,24 @@
+#youtube video link https://youtu.be/9oZIbptSPFY
+
+#you have to use my code in cloud terminal 
+# copy paste all code at a time.
+
+gcloud auth list
+gcloud config list project
+gcloud config set compute/zone us-central1-a
+gcloud container clusters create awwvision \
+    --num-nodes 2 \
+    --scopes cloud-platform \
+    --cluster-version=1.14
+
+gcloud container clusters get-credentials awwvision
+kubectl cluster-info
+sudo apt-get update
+sudo apt-get install virtualenv
+virtualenv -p python3 venv
+source venv/bin/activate
+gsutil -m cp -r gs://spls/gsp066/cloud-vision .
+cd cloud-vision/python/awwvision
+make all
+
+
